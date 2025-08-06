@@ -51,7 +51,9 @@ router.get('/accept/:token', async (req, res) => {
     await booking.save();
 
     // Send final confirmation email to customer
-    await emailService.sendFinalConfirmation(booking);
+    console.log('Attempting to send final confirmation email to:', booking.customerEmail);
+    const emailResult = await emailService.sendFinalConfirmation(booking);
+    console.log('Final confirmation email result:', emailResult);
 
     res.json({
       message: 'Booking confirmed successfully',
@@ -119,7 +121,9 @@ router.get('/decline/:token', async (req, res) => {
     await booking.save();
 
     // Send decline notification to customer
-    await emailService.sendDeclineNotification(booking);
+    console.log('Attempting to send decline notification email to:', booking.customerEmail);
+    const emailResult = await emailService.sendDeclineNotification(booking);
+    console.log('Decline notification email result:', emailResult);
 
     res.json({
       message: 'Booking declined successfully',
