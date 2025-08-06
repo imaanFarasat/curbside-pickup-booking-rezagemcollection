@@ -10,9 +10,17 @@ router.get('/accept/:token', async (req, res) => {
   try {
     const { token } = req.params;
     
+    console.log('Admin accept request received for token:', token);
+    
     const booking = await Booking.findOne({ 
       where: { adminToken: token }
     });
+    
+    console.log('Booking found:', booking ? 'Yes' : 'No');
+    if (booking) {
+      console.log('Booking status:', booking.status);
+      console.log('Booking ID:', booking.id);
+    }
     
     if (!booking) {
       return res.status(404).json({
@@ -70,9 +78,17 @@ router.get('/decline/:token', async (req, res) => {
   try {
     const { token } = req.params;
     
+    console.log('Admin decline request received for token:', token);
+    
     const booking = await Booking.findOne({ 
       where: { adminToken: token }
     });
+    
+    console.log('Booking found:', booking ? 'Yes' : 'No');
+    if (booking) {
+      console.log('Booking status:', booking.status);
+      console.log('Booking ID:', booking.id);
+    }
     
     if (!booking) {
       return res.status(404).json({

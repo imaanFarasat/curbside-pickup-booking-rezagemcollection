@@ -34,6 +34,12 @@ app.use(limiter);
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
+// Debug middleware - log all requests
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
+  next();
+});
+
 // Health check endpoint - Add this early so Railway can check it
 app.get('/health', (req, res) => {
   res.json({ 
@@ -41,6 +47,14 @@ app.get('/health', (req, res) => {
     timestamp: new Date().toISOString(),
     service: 'Reza Gem Collection Booking API',
     environment: process.env.NODE_ENV || 'development'
+  });
+});
+
+// Test route
+app.get('/test', (req, res) => {
+  res.json({ 
+    message: 'Server is working!',
+    timestamp: new Date().toISOString()
   });
 });
 
@@ -106,10 +120,14 @@ const startServer = async () => {
 
 // Routes - Add these after health check with error handling
 try {
+  console.log('Loading routes...');
   app.use('/api/bookings', require('./routes/bookings'));
+  console.log('Bookings route loaded');
   app.use('/api/slots', require('./routes/slots'));
+  console.log('Slots route loaded');
   app.use('/api/admin', require('./routes/admin'));
-  console.log('Routes loaded successfully');
+  console.log('Admin route loaded');
+  console.log('All routes loaded successfully');
 } catch (error) {
   console.error('Error loading routes:', error);
 }

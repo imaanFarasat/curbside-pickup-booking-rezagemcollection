@@ -1,5 +1,6 @@
 [build]
 builder = "nixpacks"
+buildCommand = "npm run build:railway-simple"
 
 [deploy]
 startCommand = "npm run start:railway"
