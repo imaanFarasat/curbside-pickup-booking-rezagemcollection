@@ -59,14 +59,6 @@ app.get('/test', (req, res) => {
   });
 });
 
-// Root route
-app.get('/', (req, res) => {
-  res.json({ 
-    message: 'Root route working!',
-    timestamp: new Date().toISOString()
-  });
-});
-
 // Test API route
 app.get('/api/test', (req, res) => {
   res.json({ 
