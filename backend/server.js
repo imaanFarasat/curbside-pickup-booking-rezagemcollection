@@ -159,6 +159,15 @@ try {
 // Serve static files from the React app build directory
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Debug: Check if index.html exists
+const fs = require('fs');
+const indexPath = path.join(__dirname, 'public', 'index.html');
+console.log('Checking for index.html at:', indexPath);
+console.log('index.html exists:', fs.existsSync(indexPath));
+if (fs.existsSync(indexPath)) {
+  console.log('index.html content length:', fs.statSync(indexPath).size);
+}
+
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error('Error:', err.stack);

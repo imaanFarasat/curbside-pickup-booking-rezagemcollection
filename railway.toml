@@ -1,6 +1,6 @@
 [build]
 builder = "nixpacks"
-buildCommand = "npm run build:railway-simple"
+buildCommand = "npm install && cd frontend && npm install && npm run build && cd .. && mkdir -p backend/public && cp -r frontend/dist/* backend/public/ && cd backend && npm install"
 
 [deploy]
 startCommand = "npm run start:railway"
