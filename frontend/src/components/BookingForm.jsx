@@ -82,17 +82,8 @@ const BookingForm = () => {
 
       const response = await axios.post('/api/bookings', bookingData);
       
-      toast.success('Booking submitted successfully! Check your email for confirmation.');
-      
-      // Reset form
-      setSelectedDate(null);
-      setSelectedTime('');
-      setFormData({
-        customerName: '',
-        customerEmail: '',
-        customerPhone: '',
-        specialInstructions: ''
-      });
+      // Navigate to thank you page instead of showing toast
+      navigate('/thank-you');
       
     } catch (error) {
       console.error('Error submitting booking:', error);

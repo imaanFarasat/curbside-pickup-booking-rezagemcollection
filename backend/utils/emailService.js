@@ -87,6 +87,10 @@ class EmailService {
     };
 
     try {
+      console.log('Sending final confirmation email to:', booking.customerEmail);
+      console.log('Email template length:', mailOptions.html.length);
+      console.log('Email template preview:', mailOptions.html.substring(0, 200) + '...');
+      
       await this.transporter.sendMail(mailOptions);
       await booking.update({
         emailSentFinalConfirmation: true

@@ -5,6 +5,7 @@ import BookingForm from './components/BookingForm.jsx';
 import AdminAccept from './components/AdminAccept.jsx';
 import AdminDecline from './components/AdminDecline.jsx';
 import BookingTracking from './components/BookingTracking.jsx';
+import ThankYou from './components/ThankYou.jsx';
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
 
@@ -32,6 +33,7 @@ function App() {
             <Route path="/track/:token" element={<BookingTracking />} />
             <Route path="/admin/accept/:token" element={<AdminAccept />} />
             <Route path="/admin/decline/:token" element={<AdminDecline />} />
+            <Route path="/thank-you" element={<ThankYou />} />
           </Routes>
         </main>
         
