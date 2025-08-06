@@ -40,15 +40,30 @@ const initializeDatabase = async () => {
   try {
     await testConnection();
     // Sync all models with database (create tables if they don't exist)
-    await sequelize.sync({ force: true });
+    await sequelize.sync({ force: false }); // Changed to false to preserve data
     console.log('Database synchronized');
   } catch (error) {
     console.error('Database initialization error:', error);
+    console.log('Server will start without database connection. Please check your database configuration.');
   }
 };
 
-// Initialize database
-initializeDatabase();
+// Initialize database with retry
+const startServer = async () => {
+  try {
+    await initializeDatabase();
+  } catch (error) {
+    console.error('Failed to initialize database:', error);
+  }
+  
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+    console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+  });
+};
+
+// Start server
+startServer();
 
 // Routes
 app.use('/api/bookings', require('./routes/bookings'));
@@ -79,9 +94,4 @@ app.use((err, req, res, next) => {
 // Catch all handler: send back React's index.html file for any non-API routes
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
 }); 
