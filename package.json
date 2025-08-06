@@ -13,7 +13,7 @@
     "build:frontend": "cd frontend && npm run build",
     "build": "npm run install:all && npm run build:frontend && npm run copy-build",
     "build:railway": "npm install && cd frontend && npm install && npm run build && cd .. && mkdir -p backend/public && cp -r frontend/build/* backend/public/",
-    "build:railway-simple": "cd frontend && npm install && npm run build && cd .. && ls -la frontend/dist && mkdir -p backend/public && cp -r frontend/dist/* backend/public/ && cd backend && npm install && ls -la public/",
+    "build:railway-simple": "cd frontend && npm install && npm run build && cd .. && echo '=== FRONTEND BUILD COMPLETE ===' && ls -la frontend/dist && echo '=== COPYING TO BACKEND ===' && mkdir -p backend/public && cp -r frontend/dist/* backend/public/ && echo '=== BACKEND PUBLIC FILES ===' && ls -la backend/public && cd backend && npm install",
     "build:railway-debug": "ls -la && ls -la frontend/dist && npm install && cd frontend && npm install && npm run build && cd .. && mkdir -p backend/public && cp -r frontend/dist/* backend/public/",
     "copy-build": "mkdir -p backend/public && cp -r frontend/dist/* backend/public/",
     "start:backend": "cd backend && npm start",
