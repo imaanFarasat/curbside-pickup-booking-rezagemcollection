@@ -4,16 +4,22 @@ require('dotenv').config();
 // Parse DATABASE_URL from Railway
 const parseDatabaseUrl = () => {
   if (process.env.DATABASE_URL) {
-    // Parse DATABASE_URL format: mysql://username:password@host:port/database
-    const url = new URL(process.env.DATABASE_URL);
-    return {
-      host: url.hostname,
-      port: url.port || 3306,
-      username: url.username,
-      password: url.password,
-      database: url.pathname.substring(1), // Remove leading slash
-      dialect: 'mysql'
-    };
+    try {
+      // Parse DATABASE_URL format: mysql://username:password@host:port/database
+      const url = new URL(process.env.DATABASE_URL);
+      return {
+        host: url.hostname,
+        port: url.port || 3306,
+        username: url.username,
+        password: url.password,
+        database: url.pathname.substring(1), // Remove leading slash
+        dialect: 'mysql'
+      };
+    } catch (error) {
+      console.error('Invalid DATABASE_URL format:', process.env.DATABASE_URL);
+      console.error('Error parsing DATABASE_URL:', error.message);
+      console.log('Falling back to individual environment variables...');
+    }
   }
   
   // Fallback to individual environment variables
@@ -42,6 +48,14 @@ const retryConnection = async (fn, maxRetries = 5, delay = 2000) => {
 
 // Get database configuration
 const dbConfig = parseDatabaseUrl();
+
+console.log('Database configuration:', {
+  host: dbConfig.host,
+  port: dbConfig.port,
+  database: dbConfig.database,
+  user: dbConfig.username,
+  hasPassword: !!dbConfig.password
+});
 
 // First, connect without specifying a database to create it if needed
 const createDatabaseIfNotExists = async () => {
