@@ -58,6 +58,14 @@ app.get('/test', (req, res) => {
   });
 });
 
+// Test API route
+app.get('/api/test', (req, res) => {
+  res.json({ 
+    message: 'API is working!',
+    timestamp: new Date().toISOString()
+  });
+});
+
 // Database connection and sync
 const initializeDatabase = async () => {
   try {
@@ -121,12 +129,17 @@ const startServer = async () => {
 // Routes - Add these after health check with error handling
 try {
   console.log('Loading routes...');
-  app.use('/api/bookings', require('./routes/bookings'));
-  console.log('Bookings route loaded');
-  app.use('/api/slots', require('./routes/slots'));
-  console.log('Slots route loaded');
-  app.use('/api/admin', require('./routes/admin'));
-  console.log('Admin route loaded');
+  const bookingsRouter = require('./routes/bookings');
+  const slotsRouter = require('./routes/slots');
+  const adminRouter = require('./routes/admin');
+  
+  console.log('Routers loaded, mounting...');
+  app.use('/api/bookings', bookingsRouter);
+  console.log('Bookings route mounted at /api/bookings');
+  app.use('/api/slots', slotsRouter);
+  console.log('Slots route mounted at /api/slots');
+  app.use('/api/admin', adminRouter);
+  console.log('Admin route mounted at /api/admin');
   console.log('All routes loaded successfully');
 } catch (error) {
   console.error('Error loading routes:', error);
@@ -146,6 +159,7 @@ app.use((err, req, res, next) => {
 
 // Catch all handler: send back React's index.html file for any non-API routes
 app.get('*', (req, res) => {
+  console.log('Catch-all route hit:', req.path);
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
