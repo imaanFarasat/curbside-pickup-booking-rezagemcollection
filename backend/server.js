@@ -37,6 +37,7 @@ app.use(express.urlencoded({ extended: true }));
 // Debug middleware - log all requests
 app.use((req, res, next) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
+  console.log('Request headers:', req.headers);
   next();
 });
 
@@ -54,6 +55,14 @@ app.get('/health', (req, res) => {
 app.get('/test', (req, res) => {
   res.json({ 
     message: 'Server is working!',
+    timestamp: new Date().toISOString()
+  });
+});
+
+// Root route
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'Root route working!',
     timestamp: new Date().toISOString()
   });
 });
@@ -98,6 +107,8 @@ const startServer = async () => {
     console.log(`Server running on port ${PORT}`);
     console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
     console.log(`Database connected: ${dbConnected}`);
+    console.log(`Server URL: http://localhost:${PORT}`);
+    console.log(`Health check URL: http://localhost:${PORT}/health`);
   });
 
   // Handle server errors
