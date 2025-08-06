@@ -1,0 +1,42 @@
+{
+  "name": "rezagem-booking-system",
+  "version": "1.0.0",
+  "description": "Curbside pickup booking system for Reza Gem Collection",
+  "private": true,
+  "scripts": {
+    "install:backend": "cd backend && npm install",
+    "install:frontend": "cd frontend && npm install",
+    "install:all": "npm run install:backend && npm run install:frontend",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm start",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "build:frontend": "cd frontend && npm run build",
+    "build": "npm run install:all && npm run build:frontend && npm run copy-build",
+    "copy-build": "cp -r frontend/build backend/public",
+    "start:backend": "cd backend && npm start",
+    "start": "npm run start:backend",
+    "test:backend": "cd backend && npm test",
+    "test:frontend": "cd frontend && npm test"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/rezagem-booking.git"
+  },
+  "keywords": [
+    "booking",
+    "curbside",
+    "pickup",
+    "rezagem",
+    "react",
+    "nodejs",
+    "mongodb"
+  ],
+  "author": "Reza Gem Collection",
+  "license": "MIT"
+} 
