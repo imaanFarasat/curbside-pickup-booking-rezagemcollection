@@ -230,26 +230,6 @@ class EmailService {
           ${booking.specialInstructions ? `<p><strong>Additional Notes:</strong> ${booking.specialInstructions}</p>` : ''}
         </div>
 
-        <div style="background-color: #d1ecf1; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-          <h3 style="color: #0c5460; margin-bottom: 15px;">Pickup Instructions</h3>
-          <p><strong>Address:</strong> 30 Bertrand Ave Unit A1 & A2, Scarborough, ON M1L 2P5, Canada</p>
-          <p><strong>What to do:</strong></p>
-          <ul>
-            <li>Arrive at your scheduled time</li>
-            <li>Call us when you arrive</li>
-            <li>Stay in your vehicle</li>
-            <li>We'll bring your items to your car</li>
-          </ul>
-        </div>
-
-        <div style="background-color: #fff3cd; padding: 20px; border-radius: 8px;">
-          <h3 style="color: #856404; margin-bottom: 15px;">Important Reminders</h3>
-          <p>• Please arrive on time for your appointment</p>
-          <p>• Bring a valid ID for pickup</p>
-          <p>• Have your phone ready to call us when you arrive</p>
-          <p>• If you need to cancel or reschedule, please contact us as soon as possible</p>
-        </div>
-
         <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #ecf0f1;">
           <p style="color: #7f8c8d; font-size: 14px;">
             Thank you for choosing Reza Gem Collection!<br>
