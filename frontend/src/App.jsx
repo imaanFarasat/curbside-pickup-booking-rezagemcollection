@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import BookingForm from './components/BookingForm';
-import AdminAccept from './components/AdminAccept';
-import AdminDecline from './components/AdminDecline';
-import BookingTracking from './components/BookingTracking';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import BookingForm from './components/BookingForm.jsx';
+import AdminAccept from './components/AdminAccept.jsx';
+import AdminDecline from './components/AdminDecline.jsx';
+import BookingTracking from './components/BookingTracking.jsx';
+import Header from './components/Header.jsx';
+import Footer from './components/Footer.jsx';
 
 
 function App() {
